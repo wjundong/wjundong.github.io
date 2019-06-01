@@ -122,7 +122,7 @@
 <meta property="og:site_name" content="东东">
 <meta property="og:description" content="&amp;#x901A;&amp;#x8FC7;catkin_make&amp;#x5FEB;&amp;#x901F;&amp;#x521B;&amp;#x5EFA;ros&amp;#x5F00;&amp;#x53D1;&amp;#x73AF;&amp;#x5883;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-01T04:33:26.656Z">
+<meta property="og:updated_time" content="2019-06-01T04:43:56.899Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ROS初步-用Catkin_make创建一个工作空间和一个程序包">
 <meta name="twitter:description" content="&amp;#x901A;&amp;#x8FC7;catkin_make&amp;#x5FEB;&amp;#x901F;&amp;#x521B;&amp;#x5EFA;ros&amp;#x5F00;&amp;#x53D1;&amp;#x73AF;&amp;#x5883;">
@@ -407,9 +407,9 @@
 <a id="more"></a>
 
 
-<div id="outline-container-org0d9573b" class="outline-2">
-<h2 id="org0d9573b">&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x533A;&#xFF08;Workspace&#xFF09;</h2>
-<div class="outline-text-2" id="text-org0d9573b">
+<div id="outline-container-org82dd1c3" class="outline-2">
+<h2 id="org82dd1c3">&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x533A;&#xFF08;Workspace&#xFF09;</h2>
+<div class="outline-text-2" id="text-org82dd1c3">
 <ul class="org-ul">
 <li><p>
 &#x5DE5;&#x4F5C;&#x533A;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x9879;&#x76EE;&#x8FDB;&#x884C;&#x7F16;&#x8BD1;&#xFF0C;&#x5B58;&#x653E;ROS&#x7A0B;&#x5E8F;&#x7684;&#x6E90;&#x6587;&#x4EF6;&#x3001;&#x7F16;&#x8BD1;&#x6587;&#x4EF6;&#x548C;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x3002;&#x5EFA;&#x7ACB;&#x5DE5;&#x4F5C;&#x533A;&#x7684;&#x65B9;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;
@@ -450,9 +450,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgc416ba8" class="outline-2">
-<h2 id="orgc416ba8">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;ROS&#x5DE5;&#x7A0B;&#x5305;&#xFF08;Package&#xFF09;</h2>
-<div class="outline-text-2" id="text-orgc416ba8">
+<div id="outline-container-orga34da6a" class="outline-2">
+<h2 id="orga34da6a">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;ROS&#x5DE5;&#x7A0B;&#x5305;&#xFF08;Package&#xFF09;</h2>
+<div class="outline-text-2" id="text-orga34da6a">
 <ul class="org-ul">
 <li><p>
 &#x9996;&#x5148;&#x5207;&#x6362;&#x5230;&#x5DE5;&#x4F5C;&#x533A;&#xFF1A;
@@ -462,15 +462,14 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/catkin_ws/src</span><br></pre></td></tr></table></figure>
 </div></li>
 
-<li>&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>catkin_create_pkg</code> &#x547D;&#x4EE4;&#x53BB;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x53EB; <code>beginner_tutorials</code> &#x7684;&#x5305;&#xFF0C;&#x8FD9;&#x4E2A;&#x5305;&#x4F9D;&#x9760; <code>std_msgs</code> &#x3001; <code>roscpp</code> &#x3001; <code>rospy</code> &#x3002;</li>
-</ul>
-
+<li><p>
+&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>catkin_create_pkg</code> &#x547D;&#x4EE4;&#x53BB;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x53EB; <code>beginner_tutorials</code> &#x7684;&#x5305;&#xFF0C;&#x8FD9;&#x4E2A;&#x5305;&#x4F9D;&#x9760; <code>std_msgs</code> &#x3001; <code>roscpp</code> &#x3001; <code>rospy</code> &#x3002;
+</p>
 
 <div class="org-src-container">
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_create_pkg beginner_tutorials std_msgs rospy roscpp</span><br></pre></td></tr></table></figure>
-</div>
+</div></li>
 
-<ul class="org-ul">
 <li><p>
 &#x63A5;&#x4E0B;&#x6765;&#x5728;&#x5DE5;&#x4F5C;&#x533A;&#x7F16;&#x8BD1;&#x8FD9;&#x4E2A;&#x5DE5;&#x7A0B;&#x5305;&#x3002;
 </p>
@@ -707,7 +706,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#org0d9573b"><span class="nav-number">1.</span> <span class="nav-text">创建工作区（Workspace）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#orgc416ba8"><span class="nav-number">2.</span> <span class="nav-text">创建一个ROS工程包（Package）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#org82dd1c3"><span class="nav-number">1.</span> <span class="nav-text">创建工作区（Workspace）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#orga34da6a"><span class="nav-number">2.</span> <span class="nav-text">创建一个ROS工程包（Package）</span></a></li></ol></div>
             
 
           </div>
