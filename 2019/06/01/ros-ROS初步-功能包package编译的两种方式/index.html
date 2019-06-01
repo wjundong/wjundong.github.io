@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ROS初步,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ROS&amp;#x7684;&amp;#x5305;&amp;#x7F16;&amp;#x8BD1;&amp;#x6709;&amp;#x4E24;&amp;#x79CD;&amp;#x65B9;&amp;#x6CD5;&amp;#x3002;&amp;#x4E00;&amp;#x79CD;&amp;#x662F;&amp;#x7528;rosmake&amp;#xFF0C;&amp;#x8FD9;&amp;#x79CD;&amp;#x65B9;&amp;#x6CD5;&amp;#x7B80;&amp;#x5355;&amp;#xFF1B;&amp;#x53E6;&amp;#x4">
+<meta name="keywords" content="ROS初步">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ROS初步-功能包package编译的两种方式">
+<meta property="og:url" content="http://wjundong.me/2019/06/01/ros-ROS初步-功能包package编译的两种方式/index.html">
+<meta property="og:site_name" content="东东">
+<meta property="og:description" content="ROS&amp;#x7684;&amp;#x5305;&amp;#x7F16;&amp;#x8BD1;&amp;#x6709;&amp;#x4E24;&amp;#x79CD;&amp;#x65B9;&amp;#x6CD5;&amp;#x3002;&amp;#x4E00;&amp;#x79CD;&amp;#x662F;&amp;#x7528;rosmake&amp;#xFF0C;&amp;#x8FD9;&amp;#x79CD;&amp;#x65B9;&amp;#x6CD5;&amp;#x7B80;&amp;#x5355;&amp;#xFF1B;&amp;#x53E6;&amp;#x4">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-01T10:21:54.701Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ROS初步-功能包package编译的两种方式">
+<meta name="twitter:description" content="ROS&amp;#x7684;&amp;#x5305;&amp;#x7F16;&amp;#x8BD1;&amp;#x6709;&amp;#x4E24;&amp;#x79CD;&amp;#x65B9;&amp;#x6CD5;&amp;#x3002;&amp;#x4E00;&amp;#x79CD;&amp;#x662F;&amp;#x7528;rosmake&amp;#xFF0C;&amp;#x8FD9;&amp;#x79CD;&amp;#x65B9;&amp;#x6CD5;&amp;#x7B80;&amp;#x5355;&amp;#xFF1B;&amp;#x53E6;&amp;#x4">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wjundong.me/2019/06/01/ros-ROS初步-功能包package编译的两种方式/">
+
+
+
+
+
+  <title>ROS初步-功能包package编译的两种方式 | 东东</title>
+  
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/live2d-widget/assets/waifu.css">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">东东</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wjundong.me/2019/06/01/ros-ROS初步-功能包package编译的两种方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="东东">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/头像/01.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="东东">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ROS初步-功能包package编译的两种方式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T00:00:00+08:00">
+                2019-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ros/" itemprop="url" rel="index">
+                    <span itemprop="name">ros</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/01/ros-ROS初步-功能包package编译的两种方式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/01/ros-ROS初步-功能包package编译的两种方式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/06/01/ros-ROS初步-功能包package编译的两种方式/" class="leancloud_visitors" data-flag-title="ROS初步-功能包package编译的两种方式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <div id="content">
+<p>
+ROS&#x7684;&#x5305;&#x7F16;&#x8BD1;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x3002;&#x4E00;&#x79CD;&#x662F;&#x7528;rosmake&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x7B80;&#x5355;&#xFF1B;&#x53E6;&#x4E00;&#x79CD;&#x662F;&#x7528;catkin_make&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x66F4;&#x65B9;&#x4FBF;&#x5305;&#x7684;&#x7BA1;&#x7406;&#x548C;&#x5F00;&#x53D1;&#x3002;&#x8FD9;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x90FD;&#x662F;&#x5148;&#x5EFA;&#x7ACB;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;workspace&#xFF08;&#x7C7B;&#x4F3C;&#x4E8E;vs&#x4E0B;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x7528;&#x6765;&#x7BA1;&#x7406;&#x5F88;&#x591A;&#x7684;&#x9879;&#x76EE;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x5EFA;&#x7ACB;&#x5305;package&#xFF08;&#x7C7B;&#x4F3C;&#x4E8E;vs&#x4E0B;&#x7684;&#x9879;&#x76EE;&#xFF09;&#xFF0C;&#x6700;&#x540E;&#x5229;&#x7528;rosmake&#x6216;&#x8005;catkin_make&#x8FDB;&#x884C;&#x7F16;&#x8BD1;&#x548C;&#x8FD0;&#x884C;&#x3002;&#x5B66;&#x4F1A;&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x518D;&#x53BB;&#x5B66;&#x4E60;&#x7B2C;&#x4E8C;&#x79CD;&#x5C31;&#x5F88;&#x7B80;&#x5355;&#x4E86;&#x3002;
+</p>
+
+<div id="outline-container-org113254e" class="outline-2">
+<h2 id="org113254e">rosmake&#x7F16;&#x8BD1;&#x5305;package</h2>
+<div class="outline-text-2" id="text-org113254e">
+</div>
+<div id="outline-container-org4b770b2" class="outline-3">
+<h3 id="org4b770b2">&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;</h3>
+<div class="outline-text-3" id="text-org4b770b2">
+<p>
+&#x5728;&#x5F00;&#x59CB;&#x5177;&#x4F53;&#x5DE5;&#x4F5C;&#x4E4B;&#x524D;&#xFF0C;&#x9996;&#x5148;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#xFF0C;&#x5E76;&#x4E14;&#x4E3A;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x5230;~/.bashrc&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x67E5;&#x770B;&#x5DF2;&#x6709;&#x7684;&#x7A7A;&#x95F4;&#x8DEF;&#x5F84;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x67E5;&#x8BE2;&#x547D;&#x4EE4;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$ROS_PACKAGE_PATH</span></span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x4F60;&#x5C06;&#x4F1A;&#x770B;&#x5230;&#x5982;&#x4E0B;&#x7684;&#x4FE1;&#x606F;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/opt/ros/jade/stacks</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x8FD9;&#x91CC;&#x7684;&#x521B;&#x5EFA;&#x7A7A;&#x95F4;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x5148;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x6587;&#x4EF6;&#x5939;&#x7684;&#x8DEF;&#x5F84;&#x8BBE;&#x7F6E;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;~/.bashrc&#x4E2D;&#x3002;&#x4F8B;&#x5982;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x521B;&#x5EFA;&#x76EE;&#x5F55;~/dev/rosbook&#x4F5C;&#x4E3A;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#x3002;
+&#x9996;&#x5148;&#x6267;&#x884C;&#x547D;&#x4EE4;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">mkdir -p dev/rosbook</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x7136;&#x540E;&#x5C06;&#x521B;&#x5EFA;&#x7684;&#x8DEF;&#x5F84;&#x52A0;&#x5165;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x4E2D;&#xFF0C;&#x6267;&#x884C;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export ROS_PACKAGE_PATH=~/dev/rosbook:<span class="variable">${ROS_PACKAGE_PATH}</span>&quot;</span> &gt;&gt; ~/.bashrc</span><br><span class="line">. ~/.bashrc</span><br></pre></td></tr></table></figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1c84366" class="outline-3">
+<h3 id="org1c84366">&#x521B;&#x5EFA;&#x5305;</h3>
+<div class="outline-text-3" id="text-org1c84366">
+<p>
+&#x53EF;&#x4EE5;&#x624B;&#x52A8;&#x521B;&#x5EFA;&#x5305;&#xFF0C;&#x4F46;&#x662F;&#x975E;&#x5E38;&#x7684;&#x7E41;&#x7410;&#xFF0C;&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#xFF0C;&#x6700;&#x597D;&#x4F7F;&#x7528;roscreate-pkg&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;&#xFF0C;&#x8BE5;&#x547D;&#x4EE4;&#x884C;&#x7684;&#x683C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">roscreate-pkg [package_name] [depend1] [depend2] [depend3] ...</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x547D;&#x4EE4;&#x884C;&#x5305;&#x542B;&#x4E86;&#x8981;&#x521B;&#x5EFA;&#x5305;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x4F9D;&#x8D56;&#x5305;&#x3002;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x53EB;mypacakge1&#x7684; &#x65B0;&#x5305;&#xFF0C;&#x547D;&#x4EE4;&#x5982;&#x4E0B;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/dev/rosbook</span><br><span class="line">roscreate-pkg mypackage1 std_msgs roscpp rospy</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x8FD9;&#x6837;&#x5C31;&#x5B8C;&#x6210;&#x4E86;&#x5305;&#x7684;&#x521B;&#x5EFA;&#xFF0C;&#x6211;&#x4EEC;&#x53D1;&#x73B0;&#x5728;mypackage1&#x7684;&#x76EE;&#x5F55;&#x4E0B;&#x6709;&#x4E00;&#x4E2A;src&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x6211;&#x4EEC;&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x662F;&#x5F80;&#x8FD9;&#x91CC;&#x6DFB;&#x52A0;&#x6E90;&#x7A0B;&#x5E8F;&#x4E86;&#x3002;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0993e39" class="outline-3">
+<h3 id="org0993e39">&#x4EE3;&#x7801;&#x7F16;&#x8F91;&#x548C;&#x7F16;&#x8BD1;</h3>
+<div class="outline-text-3" id="text-org0993e39">
+<p>
+&#x53C2;&#x8003;ROS&#x5B98;&#x65B9;&#x7F51;&#x7AD9;&#x7684;&#x6559;&#x7A0B;&#xFF0C;&#x6211;&#x4EEC;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x7F16;&#x5199;&#x7B80;&#x5355;&#x7684;&#x6D88;&#x606F;&#x53D1;&#x5E03;&#x5668;&#x548C;&#x8BA2;&#x9605;&#x5668; (C++)&#xFF0C;&#x5373;&#x7F16;&#x5199;&#x4FE9;&#x4E2A;&#x6E90;&#x6587;&#x4EF6; <code>talker.cpp</code> &#x548C; <code>listener.cpp</code> &#xFF0C;&#x5E76;&#x5C06;&#x4ED6;&#x4EEC;&#x4FDD;&#x5B58;&#x5230; <code>~/dev/rosbook/mypackage1/src</code> &#x76EE;&#x5F55;&#x4E2D;&#x3002;
+&#x4EE3;&#x7801;&#x7406;&#x89E3;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="http://wiki.ros.org/cn/ROS/Tutorials/WritingPublisherSubscriber(c++)" target="_blank" rel="noopener">ROS_wiki</a>
+</p>
+
+<p>
+talker.cpp&#x5982;&#x4E0B;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&quot;ros/ros.h&quot;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&quot;std_msgs/String.h&quot;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;sstream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span><br><span class="line"></span>{</span><br><span class="line">  ros::init(argc, argv, <span class="string">&quot;talker&quot;</span>);</span><br><span class="line">  ros::NodeHandle n;</span><br><span class="line">  ros::Publisher chatter_pub = n.advertise&lt;std_msgs::String&gt;(<span class="string">&quot;chatter&quot;</span>, <span class="number">1000</span>);</span><br><span class="line">  ros::<span class="function">Rate <span class="title">loop_rate</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (ros::ok())</span><br><span class="line">  {</span><br><span class="line">    std_msgs::String msg;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">stringstream</span> ss;</span><br><span class="line">    ss &lt;&lt; <span class="string">&quot;hello world &quot;</span> &lt;&lt; count;</span><br><span class="line">    msg.data = ss.str();</span><br><span class="line"></span><br><span class="line">    ROS_INFO(<span class="string">&quot;%s&quot;</span>, msg.data.c_str());</span><br><span class="line">    chatter_pub.publish(msg);</span><br><span class="line">    ros::spinOnce();</span><br><span class="line"></span><br><span class="line">    loop_rate.sleep();</span><br><span class="line">    ++count;</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+listener.cpp&#x5982;&#x4E0B;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&quot;ros/ros.h&quot;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&quot;std_msgs/String.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">chatterCallback</span><span class="params">(<span class="keyword">const</span> std_msgs::String::ConstPtr&amp; msg)</span></span><br><span class="line"></span>{</span><br><span class="line">  ROS_INFO(<span class="string">&quot;I heard: [%s]&quot;</span>, msg-&gt;data.c_str());</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span><br><span class="line"></span>{</span><br><span class="line">  ros::init(argc, argv, <span class="string">&quot;listener&quot;</span>);</span><br><span class="line">  ros::NodeHandle n;</span><br><span class="line">  ros::Subscriber sub = n.subscribe(<span class="string">&quot;chatter&quot;</span>, <span class="number">1000</span>, chatterCallback);</span><br><span class="line">  ros::spin();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x8981;&#x544A;&#x8BC9;&#x7F16;&#x8BD1;&#x5668;&#x5982;&#x4F55;&#x53BB;&#x627E;&#x5230;&#x8FD9;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#x3002;&#x4F60;&#x9700;&#x8981;&#x6253;&#x5F00;mypackage1/CMakeLists.txt&#xFF0C;&#x5728;&#x6587;&#x4EF6;&#x7684;&#x672B;&#x5C3E;&#x6DFB;&#x52A0;&#x4E24;&#x884C;&#x547D;&#x4EE4;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">rosbuild_add_executable(talker src/talker.cpp)</span><br><span class="line">rosbuild_add_executable(listener src/listener.cpp)</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x4E07;&#x4E8B;&#x5177;&#x5907;&#xFF0C;&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x7528;rosmake&#x547D;&#x4EE4;&#x6765;&#x7F16;&#x8BD1;&#x8FD9;&#x4E2A;mypackage1&#x5305;&#x4E86;&#x3002;&#x6267;&#x884C;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosmake mypackage1</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x6700;&#x540E;&#x770B;&#x5230; <code>[ rosmake ] Built 26 packages with 0 failures.</code> &#x6CA1;&#x6709;&#x9519;&#x8BEF;&#x5C31;&#x8BF4;&#x660E;&#x7F16;&#x8BD1;&#x6210;&#x529F;&#x4E86;&#x3002;&#x7F16;&#x8BD1;&#x6210;&#x529F;&#x5C06;&#x5728;&#x5728;mypackage1/bin&#x4E0B;&#x751F;&#x6210;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x3002;
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc86c625" class="outline-3">
+<h3 id="orgc86c625">&#x8FD0;&#x884C;</h3>
+<div class="outline-text-3" id="text-orgc86c625">
+<p>
+&#x542F;&#x52A8;&#x521D;&#x59CB;&#x5316;ROS&#xFF0C;&#x8FD0;&#x884C; <code>roscore</code> &#x540E;&#x3002;&#x7528; <code>rosrun</code> &#x8FD0;&#x884C;&#x8282;&#x70B9;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun mypackage1 talker</span><br><span class="line">rosrun mypackage1 listener</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x5982;&#x679C;talker&#x5E7F;&#x64AD;&#x7684;&#x6D88;&#x606F;&#x662F;&#x80FD;&#x591F;listener&#x63A5;&#x6536;&#xFF0C;&#x5219;&#x7A0B;&#x5E8F;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x8FD0;&#x884C;&#x4E86;&#x3002;&#x81F3;&#x6B64;&#x57FA;&#x4E8E;rosmake&#x7684;&#x7F16;&#x8BD1;&#x548C;&#x8FD0;&#x884C;&#x5B8C;&#x6210;&#x4E86;&#x3002;
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdef3a79" class="outline-2">
+<h2 id="orgdef3a79">catkin_make&#x7F16;&#x8BD1;&#x5305;package</h2>
+<div class="outline-text-2" id="text-orgdef3a79">
+<p>
+catkin&#x547D;&#x4EE4;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#x548C;&#x5305;&#x76F8;&#x5BF9;&#x8981;&#x590D;&#x6742;&#x4E9B;&#xFF0C;&#x4F46;&#x662F;&#x719F;&#x6089;&#x4EE5;&#x540E;&#x5BF9;&#x9879;&#x76EE;&#x7684;&#x7BA1;&#x7406;&#x662F;&#x975E;&#x5E38;&#x6709;&#x5229;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x5B98;&#x65B9;&#x4E5F;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x5F0F;&#x3002;
+</p>
+</div>
+
+<div id="outline-container-org1ca1868" class="outline-3">
+<h3 id="org1ca1868">&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;</h3>
+<div class="outline-text-3" id="text-org1ca1868">
+<p>
+&#x5728;&#x5F00;&#x59CB;&#x5177;&#x4F53;&#x5DE5;&#x4F5C;&#x4E4B;&#x524D;&#xFF0C;&#x9996;&#x5148;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#xFF0C;&#x5E76;&#x4E14;&#x4E3A;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x5230;~/.bashrc&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x67E5;&#x770B;&#x5DF2;&#x6709;&#x7684;&#x7A7A;&#x95F4;&#x8DEF;&#x5F84;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x67E5;&#x8BE2;&#x547D;&#x4EE4;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$ROS_PACKAGE_PATH</span></span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+&#x4F60;&#x5C06;&#x4F1A;&#x770B;&#x5230;&#x5982;&#x4E0B;&#x7684;&#x4FE1;&#x606F;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/opt/ros/kinetic/share</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+&#x8FD9;&#x91CC;&#x7684;&#x521B;&#x5EFA;&#x7A7A;&#x95F4;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x5148;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x6587;&#x4EF6;&#x5939;&#x7684;&#x8DEF;&#x5F84;&#x8BBE;&#x7F6E;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;~/.bashrc&#x4E2D;&#x3002;&#x4F8B;&#x5982;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x521B;&#x5EFA;&#x76EE;&#x5F55; <code>~/catkin_ws</code> &#x4F5C;&#x4E3A;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#xFF0C;&#x548C;&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x7C7B;&#x4F3C;&#x3002;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x5F00;&#x59CB;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;catkin&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p ~/catkin_ws/src             <span class="comment">#&#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x5939;</span></span><br><span class="line"><span class="built_in">cd</span> ~/catkin_ws/src                   <span class="comment">#&#x5B9A;&#x4F4D;&#x5230;src</span></span><br><span class="line">catkin_init_workspace                <span class="comment">#&#x5BF9;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;</span></span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+&#x867D;&#x7136;&#x8FD9;&#x65F6;&#x5019;&#x5DE5;&#x4F5C;&#x533A;&#x662F;&#x7A7A;&#x7684;(&#x5728;&apos;src&apos;&#x76EE;&#x5F55;&#x4E2D;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x8F6F;&#x4EF6;&#x5305;&#xFF0C;&#x53EA;&#x6709;&#x4E00;&#x4E2A;CMakeLists.txt&#x94FE;&#x63A5;&#x6587;&#x4EF6;)&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x4F9D;&#x7136;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x7F16;&#x8BD1;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/catkin_ws/  </span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+&#x63A5;&#x4E0B;&#x6765;&#x9996;&#x5148;source&#x4E00;&#x4E0B;&#x65B0;&#x751F;&#x6210;&#x7684;setup.*sh&#x6587;&#x4EF6;&#xFF0C;&#x628A;&#x5B83;&#x52A0;&#x5165;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x5230;~/.bashrc&#x6587;&#x4EF6;&#x4E2D;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/catkin_ws/devel/setup.bash</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x5230;&#x6B64;&#x4F60;&#x7684;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#x73AF;&#x5883;&#x5DF2;&#x7ECF;&#x642D;&#x5EFA;&#x5B8C;&#x6210;
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org17ebcd5" class="outline-3">
+<h3 id="org17ebcd5">&#x521B;&#x5EFA;&#x5305;</h3>
+<div class="outline-text-3" id="text-org17ebcd5">
+<p>
+&#x9996;&#x5148;&#x5207;&#x6362;&#x5230;&#x4E4B;&#x524D;&#x521B;&#x5EFA;&#x7684;catkin&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;src&#x76EE;&#x5F55;&#x4E0B;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/catkin_ws/src</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+&#x73B0;&#x5728;&#x4F7F;&#x7528;catkin_create_pkg&#x547D;&#x4EE4;&#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; <code>mypackage1</code> &#x7684;&#x65B0;&#x7A0B;&#x5E8F;&#x5305;&#xFF0C;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x5305;&#x4F9D;&#x8D56;&#x4E8E; <code>std_msgs</code> &#x3001; <code>roscpp</code> &#x548C; <code>rospy</code>
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_create_pkg mypackage1 std_msgs rospy roscpp</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x8FD9;&#x5C06;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; <code>mypackage1</code> &#x7684;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#x91CC;&#x9762;&#x5305;&#x542B;&#x4E00;&#x4E2A; <code>package.xml</code> &#x6587;&#x4EF6;&#x548C;&#x4E00;&#x4E2A; <code>CMakeLists.txt</code> &#x6587;&#x4EF6;&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#x90FD;&#x5DF2;&#x7ECF;&#x81EA;&#x52A8;&#x5305;&#x542B;&#x4E86;&#x90E8;&#x5206;&#x4F60;&#x5728;&#x6267;&#x884C; <code>catkin_create_pkg</code> &#x547D;&#x4EE4;&#x65F6;&#x63D0;&#x4F9B;&#x7684;&#x4FE1;&#x606F;&#x3002;
+</p>
+
+<p>
+&#x548C;&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x7C7B;&#x4F3C;&#x7C7B;&#x4F3C;&#xFF0C;&#x628A;1.3&#x8282;&#x4E2D;&#x7684;&#x4E24;&#x4E2A;talker.cpp&#x548C;listener.cpp&#x62F7;&#x8D1D;&#x5230;mypackage1/src&#x4E0B;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x8981;&#x544A;&#x8BC9;&#x7F16;&#x8BD1;&#x5668;&#x5982;&#x4F55;&#x53BB;&#x627E;&#x5230;&#x8FD9;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#x3002;&#x4F60;&#x9700;&#x8981;&#x6253;&#x5F00;mypackage1/CMakeLists.txt&#xFF0C;&#x5728;&#x6587;&#x4EF6;&#x7684;&#x672B;&#x5C3E;&#x6DFB;&#x52A0;&#x547D;&#x4EE4;&#xFF1A;
+</p>
+<div class="org-src-container">
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">include_directories(include ${catkin_INCLUDE_DIRS})</span><br><span class="line"></span><br><span class="line">add_executable(talker src/talker.cpp)</span><br><span class="line">target_link_libraries(talker ${catkin_LIBRARIES})</span><br><span class="line"></span><br><span class="line">add_executable(listener src/listener.cpp)</span><br><span class="line">target_link_libraries(listener ${catkin_LIBRARIES})</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x8282;&#x70B9;&#x662F;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x8981;&#x751F;&#x6210;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x81EA;&#x7136;&#x9700;&#x8981; <code>add_executable</code> &#x8FD9;&#x662F;cmake&#x7684;&#x4E1C;&#x897F;&#x3002;&#x540C;&#x65F6;&#x5C31;&#x50CF;&#x7F16;&#x5199;&#x666E;&#x901A;&#x7684;c/c++&#x7A0B;&#x5E8F;&#x4E00;&#x6837;&#xFF0C;&#x5F53;&#x7A0B;&#x5E8F;&#x8981;&#x7528;&#x8C03;&#x7528;&#x67D0;&#x4E2A;&#x5E93;&#xFF0C;&#x81EA;&#x7136;&#x9700;&#x8981;&#x5728;&#x94FE;&#x63A5;&#x7684;&#x65F6;&#x5019;&#x63D0;&#x4F9B;&#x94FE;&#x63A5;&#x5E93;&#xFF0C;cmake&#x4E2D;&#x7528;target_link_libraries&#x6765;&#x6307;&#x5B9A;&#x8981;&#x751F;&#x6210;&#x67D0;&#x4E2A;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x6240;&#x9700;&#x8981;&#x7528;&#x5230;&#x7684;&#x94FE;&#x63A5;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x6709;&#x4E24;&#x4E2A;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#xFF0C;&#x4ED6;&#x4EEC;&#x90FD;&#x6709; <code>#include &lt;ros/ros.h&gt;</code> &#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;target_link_libraries&#x6307;&#x660E;&#x94FE;&#x63A5;&#x54EA;&#x4E2A;&#x5E93;&#x3002;
+</p>
+
+<p>
+&#x53EF;&#x662F;&#x63D0;&#x4F9B;&#x4E86;&#x53EA;&#x8FD9;&#x4E2A;&#x5E93;&#x7684;&#x540D;&#x79F0;&#xFF0C;cmake&#x5E76;&#x4E0D;&#x80FD;&#x987A;&#x5229;&#x7F16;&#x8BD1;&#xFF0C;&#x8FD9;&#x4E2A;&#x94FE;&#x63A5;&#x5E93;&#x7684;&#x8DEF;&#x5F84;&#x8981;&#x8BA9;cmake&#x627E;&#x5230;&#xFF0C;&#x8FD8;&#x9700;&#x8981;include_directories,cmake&#x7F16;&#x8BD1;&#x5B8C;&#x94FE;&#x63A5;&#x65F6;&#x5728;gcc&#x5E93;&#x627E;&#x4E0D;&#x5230;&#x4F1A;&#x53BB;&#x627E;include_directories&#x63D0;&#x4F9B;&#x7684;&#x94FE;&#x63A5;&#x5E93;&#x3002;
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc5e962a" class="outline-3">
+<h3 id="orgc5e962a">&#x7F16;&#x8BD1;</h3>
+<div class="outline-text-3" id="text-orgc5e962a">
+<p>
+catkin_make &#x662F;&#x4E00;&#x4E2A;&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;&#xFF0C;&#x5B83;&#x7B80;&#x5316;&#x4E86;catkin&#x7684;&#x6807;&#x51C6;&#x5DE5;&#x4F5C;&#x6D41;&#x7A0B;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;catkin_make&#x662F;&#x5728;CMake&#x6807;&#x51C6;&#x5DE5;&#x4F5C;&#x6D41;&#x7A0B;&#x4E2D;&#x4F9D;&#x6B21;&#x8C03;&#x7528;&#x4E86;cmake &#x548C; make&#x3002;&#x5207;&#x6362;&#x5230;catkin workspace
+</p>
+<div class="org-src-container">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/catkin_ws/</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+</div>
+<p>
+&#x7F16;&#x8BD1;&#x6210;&#x529F;&#x7684;&#x8BDD;&#x5C31;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#x4E86;&#x3002;&#x8FD0;&#x884C;&#x7684;&#x6B65;&#x9AA4;&#x548C;1.4&#x662F;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x8BF7;&#x53C2;&#x9605;1.4&#x7684;&#x8BE6;&#x7EC6;&#x63CF;&#x8FF0;&#x3002;&#x56E0;&#x4E3A;&#x6309;&#x7167;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x7F16;&#x8BD1;&#x4E86;&#x4E24;&#x4E2A;&#x76F8;&#x540C;&#x7684;&#x5305;&#x540D;&#x548C;&#x8282;&#x70B9;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x542F;&#x52A8;&#x65F6;&#x4F1A;&#x63D0;&#x793A;&#x9009;&#x62E9;&#x54EA;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x8FD0;&#x884C;&#xFF0C;&#x6309;&#x7167;&#x63D0;&#x793A;&#x9009;&#x62E9;&#x5373;&#x53EF;&#x3002;
+</p>
+</div>
+</div>
+</div>
+</div>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏支持</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/打赏二维码/微信.jpg" alt="东东 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/打赏二维码/支付宝.jpg" alt="东东 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    东东
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://wjundong.me/2019/06/01/ros-ROS初步-功能包package编译的两种方式/" title="ROS初步-功能包package编译的两种方式">http://wjundong.me/2019/06/01/ros-ROS初步-功能包package编译的两种方式/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ROS初步/" rel="tag"># ROS初步</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/05/Hello-World/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/01/hexo-Ubuntu16-04安装hexo/" rel="prev" title="Ubuntu16.04安装hexo">
+                Ubuntu16.04安装hexo <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/头像/01.jpeg" alt="东东">
+            
+              <p class="site-author-name" itemprop="name">东东</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#org113254e"><span class="nav-number">1.</span> <span class="nav-text">rosmake编译包package</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#org4b770b2"><span class="nav-number">1.1.</span> <span class="nav-text">创建工作空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#org1c84366"><span class="nav-number">1.2.</span> <span class="nav-text">创建包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#org0993e39"><span class="nav-number">1.3.</span> <span class="nav-text">代码编辑和编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#orgc86c625"><span class="nav-number">1.4.</span> <span class="nav-text">运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#orgdef3a79"><span class="nav-number">2.</span> <span class="nav-text">catkin_make编译包package</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#org1ca1868"><span class="nav-number">2.1.</span> <span class="nav-text">创建工作空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#org17ebcd5"><span class="nav-number">2.2.</span> <span class="nav-text">创建包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#orgc5e962a"><span class="nav-number">2.3.</span> <span class="nav-text">编译</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">东东</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: 'Mky1A3y2MOmDtCkpbF4yyQGz-gzGzoHsz',
+        appKey: 'T2hinuOtsEou5xGtYD3cNlqe',
+        placeholder: '快来评论吧...',
+        avatar:'wavatar',
+        guest_info:guest,
+        pageSize:'3' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Mky1A3y2MOmDtCkpbF4yyQGz-gzGzoHsz", "T2hinuOtsEou5xGtYD3cNlqe");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=5.1.4"></script>
+
+
+  
+  <!--autoload方式加载不出来，不知道为什么。目前开启和关闭看板娘只能用注释的方法了-->
+  <!--script src="/live2d-widget/assets/autoload.js"></script-->
+  
+  <!------------------------看板娘加载部分-----------------------
+    <div class="waifu">
+      <div class="waifu-tips"></div>
+      <canvas id="live2d" class="live2d"></canvas>
+      <div class="waifu-tool">
+          <span class="fui-home"></span>
+          <span class="fui-chat"></span>
+          <span class="fui-eye"></span>
+          <span class="fui-user"></span>
+          <span class="fui-photo"></span>
+          <span class="fui-info-circle"></span>
+          <span class="fui-cross"></span>
+      </div>
+    </div>
+    <script src="/live2d-widget/assets/waifu-tips.js"></script>
+    <script src="/live2d-widget/assets/live2d.js"></script>
+    
+    <script type="text/javascript">
+        live2d_settings['modelId'] = 1;
+        live2d_settings['modelTexturesId'] = 87;
+    	initModel("/live2d-widget/assets/waifu-tips.json")
+    </script>
+   <!-------------end of------看板娘加载部分-------------------->
+
+</body>
+</html>
+
